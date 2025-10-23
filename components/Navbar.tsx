@@ -27,7 +27,6 @@ const Navbar: React.FC = () => {
               <NavLink to="/" className={linkClass}>Home</NavLink>
               <NavLink to="/listings" className={linkClass}>Listings</NavLink>
               <NavLink to="/market-insights" className={linkClass}>Market Insights</NavLink>
-              <NavLink to="/ai-concierge" className={linkClass}>AI Concierge</NavLink>
             </div>
           </div>
           <div className="-mr-2 flex md:hidden">
@@ -59,7 +58,6 @@ const Navbar: React.FC = () => {
             <NavLink to="/" className={linkClass} onClick={() => setIsOpen(false)}>Home</NavLink>
             <NavLink to="/listings" className={linkClass} onClick={() => setIsOpen(false)}>Listings</NavLink>
             <NavLink to="/market-insights" className={linkClass} onClick={() => setIsOpen(false)}>Market Insights</NavLink>
-            <NavLink to="/ai-concierge" className={linkClass} onClick={() => setIsOpen(false)}>AI Concierge</NavLink>
           </div>
         </div>
       )}

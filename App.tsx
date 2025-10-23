@@ -6,7 +6,6 @@ import Home from './components/pages/Home';
 import Listings from './components/pages/Listings';
 import PropertyDetail from './components/pages/PropertyDetail';
 import MarketInsights from './components/pages/MarketInsights';
-import AIConcierge from './components/pages/AIConcierge';
 
 const App: React.FC = () => {
     return (
@@ -19,7 +18,6 @@ const App: React.FC = () => {
                 <Route path="/listings" element={<Listings />} />
                 <Route path="/property/:id" element={<PropertyDetail />} />
                 <Route path="/market-insights" element={<MarketInsights />} />
-                <Route path="/ai-concierge" element={<AIConcierge />} />
               </Routes>
             </main>
             <Footer />

@@ -12,10 +12,10 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       <div className="text-center py-20 px-4 bg-brand-secondary rounded-lg shadow-2xl">
         <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
-          Find Your Dream Home with the Power of AI
+          Your Dream Home Awaits
         </h1>
         <p className="mt-4 text-lg md:text-xl text-brand-light max-w-3xl mx-auto">
-          Explore exclusive listings, get real-time market insights, and chat with our AI concierge to make your next move, your best move.
+          Explore exclusive listings and get real-time market insights to make your next move your best move.
         </p>
         <Link
           to="/listings"

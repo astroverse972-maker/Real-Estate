@@ -1,15 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import type { Property } from '../../types';
-import { PROPERTIES, BedIcon, BathIcon, SqftIcon, SparkleIcon } from '../../constants';
-import { generateVibeDescription } from '../../services/geminiService';
+import { PROPERTIES, BedIcon, BathIcon, SqftIcon } from '../../constants';
 import Spinner from '../Spinner';
 
 const PropertyDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [property, setProperty] = useState<Property | null>(null);
-  const [vibe, setVibe] = useState<string>('');
-  const [isLoadingVibe, setIsLoadingVibe] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
   useEffect(() => {
@@ -20,42 +17,6 @@ const PropertyDetail: React.FC = () => {
       setError('Property not found.');
     }
   }, [id]);
-
-  const fileToGenerativePart = async (file: File) => {
-    const base64EncodedDataPromise = new Promise<string>((resolve) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (typeof reader.result === 'string') {
-          resolve(reader.result.split(',')[1]);
-        }
-      };
-      reader.readAsDataURL(file);
-    });
-    return {
-      base64: await base64EncodedDataPromise,
-      mimeType: file.type,
-    };
-  };
-
-  const handleGenerateVibe = useCallback(async () => {
-    if (!property) return;
-    setIsLoadingVibe(true);
-    setVibe('');
-    try {
-        // We'll fetch the image from picsum and convert it to a blob/file to simulate an upload for the Gemini API
-        const response = await fetch(property.imageUrl);
-        const blob = await response.blob();
-        const file = new File([blob], "property_image.jpg", { type: blob.type });
-
-        const { base64, mimeType } = await fileToGenerativePart(file);
-        const description = await generateVibeDescription(property.features, base64, mimeType);
-        setVibe(description);
-    } catch (e) {
-        setVibe('Error generating the vibe. Please try again.');
-    } finally {
-        setIsLoadingVibe(false);
-    }
-  }, [property]);
 
   if (error) {
     return <div className="text-center text-red-500 text-2xl">{error}</div>;
@@ -93,26 +54,7 @@ const PropertyDetail: React.FC = () => {
             </ul>
           </div>
 
-          <div className="bg-brand-primary p-4 rounded-lg">
-            <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                <SparkleIcon className="text-brand-highlight w-6 h-6"/>
-                AI Generated Vibe
-            </h3>
-            {isLoadingVibe ? (
-                <Spinner />
-            ) : vibe ? (
-                <p className="text-brand-light italic">"{vibe}"</p>
-            ) : (
-                <button
-                    onClick={handleGenerateVibe}
-                    className="w-full bg-brand-highlight-hover text-brand-highlight-text font-bold py-2 px-4 rounded-lg hover:bg-brand-highlight transition-colors duration-300"
-                >
-                    Describe the Vibe
-                </button>
-            )}
-          </div>
-
-          <div className="flex items-center pt-4 border-t border-brand-accent">
+          <div className="flex items-center pt-6 border-t border-brand-accent">
             <img src={property.agent.avatarUrl} alt={property.agent.name} className="w-16 h-16 rounded-full mr-4" />
             <div>
               <p className="font-semibold text-white">{property.agent.name}</p>

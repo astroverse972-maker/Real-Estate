@@ -1,7 +1,5 @@
 {
-  "name": "Dream Escape AI",
-  "description": "An interactive and intelligent real estate platform leveraging Gemini API to provide unique property insights, market analysis, and a personalized AI concierge service for finding your dream escape.",
-  "requestFramePermissions": [
-    "geolocation"
-  ]
+  "name": "Dream Escape",
+  "description": "An interactive real estate platform to provide property insights and market analysis for finding your dream escape.",
+  "requestFramePermissions": []
 }

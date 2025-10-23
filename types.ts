@@ -23,7 +23,8 @@ export interface MarketData {
     'Avg. Days on Market': number;
 }
 
+// FIX: Export ChatMessage interface
 export interface ChatMessage {
-    role: 'user' | 'model';
-    text: string;
+  role: 'user' | 'model';
+  text: string;
 }
